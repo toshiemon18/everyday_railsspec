@@ -1,0 +1,253 @@
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-31 17:17:55 +0900
+
+ActiveRecord::PendingMigrationError (
+
+Migrations are pending. To resolve this issue, run:
+
+	bin/rake db:migrate RAILS_ENV=development
+
+):
+  activerecord (4.1.1) lib/active_record/migration.rb:389:in `check_pending!'
+  activerecord (4.1.1) lib/active_record/migration.rb:377:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+  activesupport (4.1.1) lib/active_support/callbacks.rb:82:in `run_callbacks'
+  actionpack (4.1.1) lib/action_dispatch/middleware/callbacks.rb:27:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/reloader.rb:73:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/remote_ip.rb:76:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/debug_exceptions.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/show_exceptions.rb:30:in `call'
+  railties (4.1.1) lib/rails/rack/logger.rb:38:in `call_app'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `block in call'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `block in tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:26:in `tagged'
+  activesupport (4.1.1) lib/active_support/tagged_logging.rb:68:in `tagged'
+  railties (4.1.1) lib/rails/rack/logger.rb:20:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/request_id.rb:21:in `call'
+  rack (1.5.2) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.5.2) lib/rack/runtime.rb:17:in `call'
+  activesupport (4.1.1) lib/active_support/cache/strategy/local_cache_middleware.rb:26:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  actionpack (4.1.1) lib/action_dispatch/middleware/static.rb:64:in `call'
+  rack (1.5.2) lib/rack/sendfile.rb:112:in `call'
+  railties (4.1.1) lib/rails/engine.rb:514:in `call'
+  railties (4.1.1) lib/rails/application.rb:144:in `call'
+  rack (1.5.2) lib/rack/lock.rb:17:in `call'
+  rack (1.5.2) lib/rack/content_length.rb:14:in `call'
+  rack (1.5.2) lib/rack/handler/webrick.rb:60:in `service'
+  /Users/toshiemon18/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:138:in `service'
+  /Users/toshiemon18/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/httpserver.rb:94:in `run'
+  /Users/toshiemon18/.rbenv/versions/2.2.0/lib/ruby/2.2.0/webrick/server.rb:294:in `block in start_thread'
+
+
+  Rendered /Users/toshiemon18/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_source.erb (0.6ms)
+  Rendered /Users/toshiemon18/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (0.9ms)
+  Rendered /Users/toshiemon18/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/toshiemon18/.rbenv/versions/2.2.0/lib/ruby/gems/2.2.0/gems/actionpack-4.1.1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (53.9ms)
+  [1m[36m (1.8ms)[0m  [1mCREATE TABLE "schema_migrations" ("version" varchar(255) NOT NULL) [0m
+  [1m[35m (0.4ms)[0m  select sqlite_version(*)
+  [1m[36m (0.9ms)[0m  [1mCREATE UNIQUE INDEX "unique_schema_migrations" ON "schema_migrations" ("version")[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+Migrating to CreateContacts (20140605000724)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "contacts" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "firstname" varchar(255), "lastname" varchar(255), "email" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20140605000724"]]
+  [1m[35m (0.5ms)[0m  commit transaction
+Migrating to CreatePhones (20140605002008)
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  CREATE TABLE "phones" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "contact_id" integer, "phone" varchar(255), "phone_type" varchar(255), "created_at" datetime, "updated_at" datetime) 
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_phones_on_contact_id" ON "phones" ("contact_id")[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140605002008"]]
+  [1m[36m (0.6ms)[0m  [1mcommit transaction[0m
+Migrating to CreateUsers (20140606035847)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.3ms)[0m  [1mCREATE TABLE "users" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar(255), "password_digest" varchar(255), "created_at" datetime, "updated_at" datetime) [0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140606035847"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+Migrating to AddAdminToUser (20140606043459)
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.6ms)[0m  [1mALTER TABLE "users" ADD "admin" boolean[0m
+  [1m[35mSQL (0.1ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20140606043459"]]
+  [1m[36m (0.5ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_phones_on_contact_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_phones_on_contact_id' AND type='index'
+[0m
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-31 17:18:16 +0900
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ContactsController#index as HTML
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "contacts"
+  Rendered contacts/index.html.erb within layouts/application (4.5ms)
+Completed 200 OK in 2385ms (Views: 2371.2ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/assets/bootstrap/alert.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/affix.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/turbolinks.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/button.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/carousel.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/collapse.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/dropdown.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/tab.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/transition.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/scrollspy.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/modal.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/tooltip.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap/popover.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/bootstrap.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/contacts.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2016-03-31 17:18:19 +0900
+
+
+Started GET "/contacts?letter=A" for 127.0.0.1 at 2016-03-31 17:18:21 +0900
+Processing by ContactsController#index as HTML
+  Parameters: {"letter"=>"A"}
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM "contacts"  WHERE (lastname LIKE 'A%')[0m
+  Rendered contacts/index.html.erb within layouts/application (2.3ms)
+Completed 200 OK in 26ms (Views: 24.3ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts?letter=B" for 127.0.0.1 at 2016-03-31 17:18:22 +0900
+Processing by ContactsController#index as HTML
+  Parameters: {"letter"=>"B"}
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "contacts"  WHERE (lastname LIKE 'B%')
+  Rendered contacts/index.html.erb within layouts/application (1.1ms)
+Completed 200 OK in 25ms (Views: 23.7ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts?letter=D" for 127.0.0.1 at 2016-03-31 17:18:22 +0900
+Processing by ContactsController#index as HTML
+  Parameters: {"letter"=>"D"}
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "contacts"  WHERE (lastname LIKE 'D%')[0m
+  Rendered contacts/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 24ms (Views: 23.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts?letter=H" for 127.0.0.1 at 2016-03-31 17:18:23 +0900
+Processing by ContactsController#index as HTML
+  Parameters: {"letter"=>"H"}
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "contacts"  WHERE (lastname LIKE 'H%')
+  Rendered contacts/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 27ms (Views: 26.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/sessions/new" for 127.0.0.1 at 2016-03-31 17:18:24 +0900
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 23ms (Views: 22.1ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2016-03-31 17:18:27 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"S/kbUi/qsRAWwiReLyng4c/K/EEPwhwtBwKolqGe5vA=", "email"=>"toshiemon18", "password"=>"[FILTERED]", "commit"=>"Log In"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users"  WHERE "users"."email" = 'toshiemon18' LIMIT 1[0m
+  Rendered sessions/new.html.erb within layouts/application (1.4ms)
+Completed 200 OK in 28ms (Views: 18.0ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2016-03-31 17:18:29 +0900
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"S/kbUi/qsRAWwiReLyng4c/K/EEPwhwtBwKolqGe5vA=", "email"=>"toshiemon18", "password"=>"[FILTERED]", "commit"=>"Log In"}
+  [1m[35mUser Load (0.1ms)[0m  SELECT  "users".* FROM "users"  WHERE "users"."email" = 'toshiemon18' LIMIT 1
+  Rendered sessions/new.html.erb within layouts/application (0.9ms)
+Completed 200 OK in 17ms (Views: 15.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/" for 127.0.0.1 at 2016-03-31 17:18:32 +0900
+Processing by ContactsController#index as HTML
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "contacts"[0m
+  Rendered contacts/index.html.erb within layouts/application (1.6ms)
+Completed 200 OK in 15ms (Views: 14.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts?letter=H" for 127.0.0.1 at 2016-03-31 17:18:38 +0900
+Processing by ContactsController#index as HTML
+  Parameters: {"letter"=>"H"}
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "contacts"  WHERE (lastname LIKE 'H%')
+  Rendered contacts/index.html.erb within layouts/application (1.3ms)
+Completed 200 OK in 26ms (Views: 25.4ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/contacts?letter=L" for 127.0.0.1 at 2016-03-31 17:18:39 +0900
+Processing by ContactsController#index as HTML
+  Parameters: {"letter"=>"L"}
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "contacts"  WHERE (lastname LIKE 'L%')[0m
+  Rendered contacts/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 26ms (Views: 24.7ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/contacts?letter=S" for 127.0.0.1 at 2016-03-31 17:18:40 +0900
+Processing by ContactsController#index as HTML
+  Parameters: {"letter"=>"S"}
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "contacts"  WHERE (lastname LIKE 'S%')
+  Rendered contacts/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 24ms (Views: 23.2ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/contacts?letter=U" for 127.0.0.1 at 2016-03-31 17:18:41 +0900
+Processing by ContactsController#index as HTML
+  Parameters: {"letter"=>"U"}
+  [1m[36m (0.2ms)[0m  [1mSELECT COUNT(*) FROM "contacts"  WHERE (lastname LIKE 'U%')[0m
+  Rendered contacts/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 25ms (Views: 24.3ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/contacts?letter=X" for 127.0.0.1 at 2016-03-31 17:18:42 +0900
+Processing by ContactsController#index as HTML
+  Parameters: {"letter"=>"X"}
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "contacts"  WHERE (lastname LIKE 'X%')
+  Rendered contacts/index.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 25ms (Views: 24.0ms | ActiveRecord: 0.1ms)
