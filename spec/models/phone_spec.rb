@@ -22,7 +22,7 @@ describe Phone do
     expect(mobile_phone.errors[:phone]).to include("has already been taken")
   end
 
-  # 2件のれんｒ買う先で同じ電話番号を共有できること
+  # 2件の連絡先で同じ電話番号を共有できること
   it "allows two contacts to share a phone number" do 
     contact = Contact.create(
       firstname: "Joe", lastname: "Tester",
