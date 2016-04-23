@@ -22,21 +22,21 @@ describe Contact do
     contact.valid?
     expect(contact.errors[:firstname]).to include("can't be blank")
   end
-  
+
   # 姓が無ければ無効な状態であること
   it "is invalid without a lastname" do
       contact = FactoryGirl.build(:contact, lastname: nil)
     contact.valid?
     expect(contact.errors[:lastname]).to include("can't be blank")
   end
-  
+
   # メールアドレスが無ければ無効な状態であること
   it "is invalid without an email address" do
     contact = FactoryGirl.build(:contact, email: nil)
     contact.valid?
     expect(contact.errors[:email]).to include("can't be blank")
   end
-  
+    
   # 重複したメールアドレスなら無効な状態であること
   it "is invalid with a duplivate email address" do
     FactoryGirl.create(:contact, email: "aaron@example.com")
@@ -89,4 +89,10 @@ describe Contact do
       end
     end
   end
+  
+  # 3つの電話番号を持つこと
+  it "has three phone numbers" do 
+    expect(create(:contact).phones.count).to eq 3
+  end
+
 end
