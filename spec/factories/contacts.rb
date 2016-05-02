@@ -4,11 +4,11 @@ FactoryGirl.define do
     lastname { Faker::Name.last_name }
     email { Faker::Internet.email }
 
-    # after(:build) do |contact|
-    #   [:home_phone, :work_phone, :mobile_phone].each do |phone|
-    #     contact.phones << FactoryGirl.build(:phone,
-    #       phone_type: phone,n contact: contact)
-    #   end
-    # end
+    after(:build) do |contact|
+      [:home_phone, :work_phone, :mobile_phone].each do |phone|
+        contact.phones << FactoryGirl.build(:phone,
+          phone_type: phone, contact: contact)
+      end
+    end
   end
 end
