@@ -8,6 +8,9 @@ FactoryGirl.define do
       [:home_phone, :work_phone, :mobile_phone].each do |phone|
         contact.phones << FactoryGirl.build(:phone,
           phone_type: phone, contact: contact)
+        factory :invalid_contact do
+            firstname nil
+        end
       end
     end
   end
