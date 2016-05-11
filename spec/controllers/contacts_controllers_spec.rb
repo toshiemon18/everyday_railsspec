@@ -6,9 +6,18 @@ describe ContactsController do
     # params[:letter]がある場合
     context "with params[:letter]" do
       # 指定された文字で始まる連絡先を配列にまとめること
-      it "populates an array of contacts starting with the letter"
+      it "populates an array of contacts starting with the letter" do
+        smith = create(:contact, lastname: 'Smith')
+        jones = create(:contact, lastname: 'Jones')
+        get :index, letter: 'S'
+        expect(assigns(:contacts)).to match_array([smith])
+      end
+
       # :indexテンプレートを表示すること
-      it "renders the :index template"
+      it "renders the :index template" do
+        get :index, letter: 'S'
+        expect(response).to render_template :index
+      end
     end
 
     # params[:letter]がない場合
