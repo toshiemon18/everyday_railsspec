@@ -23,9 +23,18 @@ describe ContactsController do
     # params[:letter]がない場合
     context "without params[:letter]" do
       # すべての連絡先を配列にまとめること
-      it "populates an array of all contacts"
+      it "populates an array of all contacts" do
+        smith = create(:contact, lastname: 'Smith')
+        jones = create(:contact, lastname: 'Jones')
+        get :index
+        expect(assigns(:contacts)).to match_array([smith, jones])
+      end
+
       # :indexテンプレートを表示すること
-      it "renders the :index template"
+      it "renders the :index template" do
+        get :index
+        expect(response).to render_template :index
+      end
     end
   end
 
