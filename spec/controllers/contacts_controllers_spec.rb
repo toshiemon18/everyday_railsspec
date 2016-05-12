@@ -46,7 +46,8 @@ describe ContactsController do
       expect(assigns(:contact)).to eq contact
     end
 
-    # :showテンプレートを表示することit "renders the :show template" do
+    #:showテンプレートを表示すること
+    it "renders the :show template" do
       contact = create(:contact)
       get :show, id: contact
       expect(response).to render_template :show
@@ -74,6 +75,7 @@ describe ContactsController do
       get :edit, id: contact
       expect(assigns(:contact)).to eq contact
     end
+
     # :editテンプレートを表示すること
     it "renders the :edit template" do
       contact = create(:contact)
@@ -83,12 +85,30 @@ describe ContactsController do
   end
 
   describe "POST #create" do
+    before :each do
+      @phone = [
+        attributes_for(:phone),
+        attributes_for(:phone),
+        attributes_for(:phone)
+      ]
+    end
+
     # 有効な属性の場合
     context "with valid attributes" do
       # データベースに新しい連絡先を保存すること
-      it "saves the new contact in the database"
+      it "saves the new contact in the database" do
+        expect {
+          post :create, contact: attributes_for(:contact,
+            phones_attributes: @phones)
+        }.to change(Contact, :count).by(1)
+      end
+
       # contacts#showにリダイレクトすること
-      it "redirects to contacts#show"
+      it "redirects to contacts#show" do
+        post :create, contact: attributes_for(:contact,
+          phones_attributes: @phones)
+        expect(response).to redirect_to contact_path(assigns[:contact])
+      end
     end
 
     # 無効な属性の場合
