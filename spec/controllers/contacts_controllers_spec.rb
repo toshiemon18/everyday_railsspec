@@ -114,9 +114,19 @@ describe ContactsController do
     # 無効な属性の場合
     context "with invalid attributes" do
       # データベースに新しい連絡先を保存しないこと
-      it "does not save the new contact in the database"
+      it "does not save the new contact in the database" do
+        expect {
+          post :create,
+            contact: attributes_for(:invalid_contact)
+        }.not_to change(Contact, :count)
+      end
+
       # :newテンプレートを再表示すること
-      it "re-renders the :new template"
+      it "re-renders the :new template" do
+        post :create,
+          contact: attributes_for(:invalid_contact)
+        expect(response).to render_template :new
+      end
     end
   end
 
