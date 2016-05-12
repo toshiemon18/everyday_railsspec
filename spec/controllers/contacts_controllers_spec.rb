@@ -46,8 +46,7 @@ describe ContactsController do
       expect(assigns(:contact)).to eq contact
     end
 
-    # :showテンプレートを表示すること
-    it "renders the :show template" do
+    # :showテンプレートを表示することit "renders the :show template" do
       contact = create(:contact)
       get :show, id: contact
       expect(response).to render_template :show
@@ -56,16 +55,31 @@ describe ContactsController do
 
   describe "GET #new" do
     # @contactに新しい連絡先を割り当てること
-    it "assigns a new Contact to @contact"
+    it "assigns a new Contact to @contact" do
+      get :new
+      expect(assigns(:contact)).to be_a_new(Contact)
+    end
+
     # :newテンプレートを表示すること
-    it "renders the :new template"
+    it "renders the :new template" do
+      get :new
+      expect(response).to render_template :new
+    end
   end
 
   describe "GET #edit" do
     # @contactに要求された連絡先を割り当てること
-    it "assigns the requested contact to @contact"
+    it "assigns the requested contact to @contact" do
+      contact = create(:contact)
+      get :edit, id: contact
+      expect(assigns(:contact)).to eq contact
+    end
     # :editテンプレートを表示すること
-    it "renders the :edit template"
+    it "renders the :edit template" do
+      contact = create(:contact)
+      get :edit, id: contact
+      expect(response).to render_template :edit
+    end
   end
 
   describe "POST #create" do
