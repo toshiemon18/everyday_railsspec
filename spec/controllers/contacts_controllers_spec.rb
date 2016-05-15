@@ -131,12 +131,30 @@ describe ContactsController do
   end
 
   describe "PATCH #update" do
+    before :each do 
+      @contact = create(:contact,
+        firstname: 'Lawrence',
+        lastname: 'Smith'
+      )
+    end
+    
     # 有効な属性の場合
     context "with valid attributes" do
       # データベースの連絡先を更新すること
-      it "updates the contact in the database"
+      it "updates the contact in the database" do
+        patch :update, id: @contact,
+          contact: attributes_for(:contact,
+            firstname: 'Larray',
+            lastname: 'Smith')
+        @contact.reload
+        expect(@contact.firstname).to eq('Larray')
+        expect(@contact.lastname).to eq('Smith')
+      end
       # 更新した連絡先のページヘリダイレクトすること
-      it "redirects to the contact"
+      it "redirects to the contact" do
+        patch :update, id: @contact, contact: attributes_for(:contact)
+        expect(response).to redirect_to @contact
+      end
     end
 
     # 無効な属性の場合
