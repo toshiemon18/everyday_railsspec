@@ -1,7 +1,6 @@
 require "rails_helper"
 
 describe ContactsController do
-
   describe "GET #index" do
     # params[:letter]がある場合
     context "with params[:letter]" do
@@ -160,16 +159,38 @@ describe ContactsController do
     # 無効な属性の場合
     context "with invalid attributes" do
       # 連絡先を更新しないこと
-      it "does not update the contact"
+      it "does not update the contact" do
+        patch :update, id: @contact,
+          contact: attributes_for(:contact,
+            firstname: "Larray", lastname: nil)
+        @contact.reload
+        expect(@contact.firstname).not_to eq("Larray")
+        expect(@contact.lastname).to eq("Smith")
+      end
       # :eidtテンプレートを再表示すること
-      it "re-renders then :edit template"
+      it "re-renders then :edit template" do
+        patch :update, id: @contact,
+          contact: attributes_for(:invalid_contact)
+        expect(response).to render_template :edit
+      end
     end
   end
 
   describe "DELETE #destroy" do
+    before :each do
+      @contact = create(:contact)
+    end
+    
     # データベースから連絡先を削除すること
-    it "deletes the contact from the database"
+    it "deletes the contact from the database" do
+      expect {
+        delete :destroy, id: @contact
+      }.to change(Contact, :count).by(-1)
+    end
     # contacts#indexにリダイレクトすること
-    it "redirects to contacts#index"
+    it "redirects to contacts#index" do
+      delete :destroy, id: @contact
+      expect(response).to redirect_to contacts_url
+    end
   end
 end
